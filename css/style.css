@@ -1,0 +1,72 @@
+body {
+  background: #ccc;
+}
+.colors {
+  color: white;
+  width: 50px;
+}
+.round {
+  margin: 10px 20px;
+}
+input{
+  width: 31px;
+  height: 34px;
+  font-size: 24px;
+  text-align: center;
+  display: inline-block;
+}
+.piece {
+  color: white;
+  font-size: 34px;
+  text-align: center;
+  height: 40px;
+  display: inline-block;
+  width: 40px;
+}
+.c0 {
+  background-color: black;
+}
+.c1 {
+  background-color: red;
+}
+.c2 {
+  background-color: orange;
+}
+.c3 {
+  background-color: green;
+}
+.c4 {
+  background-color: cyan;
+}
+.c5 {
+  background-color: #0066ff;
+}
+.c6 {
+  background-color: #002bff;
+}
+.c7 {
+  background-color: #3f00ff;
+}
+.c8 {
+  background-color: brown;
+}
+.c9 {
+  background-color: magenta;
+}
+.grid{
+  display: inline-block;
+  vertical-align: bottom;
+}
+.quad {
+  border: 1px black solid;
+  height: 8px;
+  width: 8px;
+  display: inline-block;
+  margin: 0 0 0 10px;
+}
+.quad.black {
+  background: #333;
+}
+.quad.white {
+  background: white;
+}
