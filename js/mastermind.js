@@ -1,29 +1,38 @@
-
 $(document).ready(function() {
   $("#error").hide();
   var numOfGuesses;
   var puzzleLength = 4;
   var colorsAllowed = 4;
   var answerCode;
-  for (var i = 1; i <= colorsAllowed; i++){
-    $(".colors").append("<div class='c" + i + "'>Color " + i + "</div>");
-  } 
-  for (var i = 1; i <= puzzleLength; i++){
-    $(".round").append("<input id='input" + i + "' class='userInput' type='text' maxlength='1'>");
-  }
+  $("#chooseGameParameters").click(function(){
+    colorsAllowed = parseInt($("#chooseColorsAllowed").val());
+    puzzleLength = parseInt($("#choosePuzzleLength").val());
+    startGame()
+  });
 
   startGame();
-  $(".userInput").keyup(function() {
-    if (this.value.length == this.maxLength) {
-      $(this).next('.userInput').focus();
-    }
-  });
+
   $("#resetGame").click(function() {
     startGame();
   });
-                        
+  
+  function clearGuessBoxes(){
+    for (var i = 1; i <= puzzleLength; i++) {
+      $("#input" + i).val("");
+    }
+  }
+  
   function startGame(){
+    $(".colors").html("");
+    for (var i = 1; i <= colorsAllowed; i++){
+      $(".colors").append("<div class='c" + i + "'>Color " + i + "</div>");
+    } 
+    $(".round").html("");
+    for (var i = 1; i <= puzzleLength; i++){
+      $(".round").append("<input id='input" + i + "' class='userInput' type='text' maxlength='1'>");
+    }
     numOfGuesses = 0;
+    clearGuessBoxes()
     $("#game").html("");
     var roundZero = [];
     for (var i = 0; i < puzzleLength; i++){
@@ -33,8 +42,13 @@ $(document).ready(function() {
     answerCode = generateCode();
     console.log(answerCode)
     $("#submit").prop("disabled",false);
+    $(".userInput").keyup(function() {
+      if (this.value.length == this.maxLength) {
+        $(this).next('.userInput').focus();
+      }
+    });
   }
-                        
+
   $("#submit").click(function() {
     var guess = [];
     var ans;
@@ -48,9 +62,7 @@ $(document).ready(function() {
       }
     }
     if (guess.length == puzzleLength) {
-      for (var i = 1; i <= puzzleLength; i++) {
-        $("#input" + i).val("");
-      }
+      clearGuessBoxes()
       numOfGuesses = numOfGuesses + 1;
       blackCount = getBlackCount(guess);
       var whiteCount = getWhiteCount(guess, blackCount);
@@ -96,6 +108,14 @@ $(document).ready(function() {
     }
   }
   
+  for (var i = 1; i < 10; i++){
+    var selected = (i == colorsAllowed) ? "selected" : "";
+    $("#chooseColorsAllowed").append('<option value="' + i + '" ' + selected + '>' + i + '</option>');
+  }
+  for (var i = 1; i < 10; i++){
+    var selected = (i == puzzleLength) ? "selected" : "";
+    $("#choosePuzzleLength").append('<option value="' + i + '" ' + selected + '>' + i + '</option>');
+  }
   function appendGrid(blackCount, whiteCount){
     $("#round" + numOfGuesses).append(
       '<div class="grid">' +
