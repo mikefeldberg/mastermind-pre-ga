@@ -2,27 +2,32 @@
 <html>
   <head>
     <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="js/mastermind.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Mastermind</title>
   </head>
   <body>
-    <h1>Mastermind</h1>
-    <div>How many colors would you like to have?</div>
-    <select id="chooseColorsAllowed"></select>
-    <div>How long should the code be?</div>
-    <select id="choosePuzzleLength"></select>
-    <br>
-    <button id="chooseGameParameters">Choose Parameters</button>
-    <br><br>
-    <div></div>
-    <div class="colors"></div>
-    <div class="round"></div>  
-    <button id="submit">Submit</button>
-    <button id="resetGame">Reset</button>
-    <div id="game"></div>
-    <div id="error">Valid numbers only, asshole.</div>
+    <div class="container">
+      <h1>Mastermind</h1>
+      <div>
+        <p class="inline">How many colors would you like to have?</p>
+        <select id="chooseColorsAllowed"></select>
+      </div>
+      <div>
+        <p class="inline">How long should the code be?</p>
+        <select id="choosePuzzleLength"></select>
+      </div>
+      <button id="chooseGameParameters" class="btn btn-light btn-sm">Restart</button>
+      <div class="colors"></div>
+      <div class="round inline"></div>
+      <button id="submit" class="btn btn-light btn-sm">Submit</button>
+      <div id="game"></div>
+      <div id="error">Valid numbers only, asshole.</div>
+    </div>
   </body>
 </html>

@@ -1,31 +1,35 @@
 body {
-  background: #ccc;
+  background: #ccc !important;
+}
+.container {
+  font-family: 'Muli';
 }
 .colors {
   color: white;
-  width: 50px;
+  margin: 20px 0;
+}
+.inline {
+  display: inline-block;
+}
+.color{
+  padding: 10px 20px;
+  margin-right: 7px;
 }
 .round {
   margin: 10px 20px;
 }
-input{
-  width: 31px;
-  height: 34px;
-  font-size: 24px;
-  text-align: center;
-  display: inline-block;
+select {
+  font-size: 18px !important;
 }
-.gameOptions {
-  color: black;
-  font-size: 14px;
+input{
+  width: 40px;
+  height: 44px;
+  font-size: 24px !important;
   text-align: center;
-  height: 25px;
-  display: inline-block;
-  width: 25px;
 }
 .piece {
   color: white;
-  font-size: 34px;
+  font-size: 28px;
   text-align: center;
   height: 40px;
   display: inline-block;
@@ -62,14 +66,12 @@ input{
   background-color: magenta;
 }
 .grid{
-  display: inline-block;
   vertical-align: bottom;
 }
 .quad {
   border: 1px black solid;
   height: 8px;
   width: 8px;
-  display: inline-block;
   margin: 0 0 0 10px;
 }
 .quad.black {

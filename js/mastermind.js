@@ -11,10 +11,6 @@ $(document).ready(function() {
   });
 
   startGame();
-
-  $("#resetGame").click(function() {
-    startGame();
-  });
   
   function clearGuessBoxes(){
     for (var i = 1; i <= puzzleLength; i++) {
@@ -25,11 +21,11 @@ $(document).ready(function() {
   function startGame(){
     $(".colors").html("");
     for (var i = 1; i <= colorsAllowed; i++){
-      $(".colors").append("<div class='c" + i + "'>Color " + i + "</div>");
-    } 
+      $(".colors").append("<div class='c" + i + " color inline'>Color " + i + "</div>");
+    }
     $(".round").html("");
     for (var i = 1; i <= puzzleLength; i++){
-      $(".round").append("<input id='input" + i + "' class='userInput' type='text' maxlength='1'>");
+      $(".round").append("<input id='input" + i + "' class='inline userInput' type='text' maxlength='1'>");
     }
     numOfGuesses = 0;
     clearGuessBoxes()
@@ -116,9 +112,10 @@ $(document).ready(function() {
     var selected = (i == puzzleLength) ? "selected" : "";
     $("#choosePuzzleLength").append('<option value="' + i + '" ' + selected + '>' + i + '</option>');
   }
+
   function appendGrid(blackCount, whiteCount){
     $("#round" + numOfGuesses).append(
-      '<div class="grid">' +
+      '<div class="grid inline">' +
         '<div class="row1"></div>' +
         '<div class="row2"></div>' +
       '</div>');
@@ -129,7 +126,7 @@ $(document).ready(function() {
       rowToAppendTo = (i <= Math.ceil(puzzleLength/2)) ? "row1" : "row2";
       if (remBlackCount > 0) {
         $("#round" + numOfGuesses + " ." + rowToAppendTo).append(
-          '<div class="quad black"></div>');
+          '<div class="quad black inline"></div>');
         remBlackCount = remBlackCount - 1;
       } 
     }
@@ -137,7 +134,7 @@ $(document).ready(function() {
       rowToAppendTo = (i + blackCount <= Math.ceil(puzzleLength/2)) ? "row1" : "row2";
       if (remWhiteCount > 0) {
         $("#round" + numOfGuesses + " ." + rowToAppendTo).append(
-          '<div class="quad white"></div>');
+          '<div class="quad white inline"></div>');
         remWhiteCount = remWhiteCount - 1;
       }
     }
