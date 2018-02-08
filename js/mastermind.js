@@ -37,15 +37,24 @@ $(document).ready(function() {
     displayCode(roundZero);
     answerCode = generateCode();
     console.log(answerCode)
-    $("#submit").prop("disabled",false);
-    $(".userInput").keyup(function() {
-      if (this.value.length == this.maxLength) {
-        $(this).next('.userInput').focus();
-      }
-    });
+    $("#submit").prop("disabled", false);
   }
 
-  $("#submit").click(function() {
+  $("#submit").click(handleSubmit);
+  $(".userInput").keyup(function(e) {
+    if (this.value.length == this.maxLength) {
+      $(this).next('.userInput').focus();
+    } else if (e.keyCode == 8){
+      $(this).prev('.userInput').focus();
+    }
+  });
+  $("html").keyup(function(e){
+    if (e.keyCode == 13) {
+      handleSubmit();
+    }
+  });
+
+  function handleSubmit() {
     var guess = [];
     var ans;
     var blackCount;
@@ -69,7 +78,7 @@ $(document).ready(function() {
     if (blackCount == puzzleLength){
       youWin();
     }
-  });
+  }
   
   function youWin(){
     redisplayCode(answerCode);
