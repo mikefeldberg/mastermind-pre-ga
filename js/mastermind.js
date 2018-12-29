@@ -4,10 +4,11 @@ $(document).ready(function() {
   var puzzleLength = 4;
   var colorsAllowed = 4;
   var answerCode;
+
   $("#chooseGameParameters").click(function(){
     colorsAllowed = parseInt($("#chooseColorsAllowed").val());
     puzzleLength = parseInt($("#choosePuzzleLength").val());
-    startGame()
+    startGame();
   });
 
   startGame();
@@ -23,31 +24,36 @@ $(document).ready(function() {
     for (var i = 1; i <= colorsAllowed; i++){
       $(".colors").append("<div class='c" + i + " color inline'>Color " + i + "</div>");
     }
+
     $(".round").html("");
     for (var i = 1; i <= puzzleLength; i++){
       $(".round").append("<input id='input" + i + "' class='inline userInput' type='text' maxlength='1'>");
     }
+
     numOfGuesses = 0;
-    clearGuessBoxes()
+    clearGuessBoxes();
     $("#game").html("");
     var roundZero = [];
     for (var i = 0; i < puzzleLength; i++){
       roundZero = roundZero.concat([0]);
     }
+
     displayCode(roundZero);
     answerCode = generateCode();
-    console.log(answerCode)
+
+    $(".userInput").keyup(function(e) {
+      if (this.value.length == this.maxLength) {
+        $(this).next('.userInput').focus();
+      } else if (e.keyCode == 8){
+        $(this).prev('.userInput').focus();
+      }
+    });
+
     $("#submit").prop("disabled", false);
   }
 
   $("#submit").click(handleSubmit);
-  $(".userInput").keyup(function(e) {
-    if (this.value.length == this.maxLength) {
-      $(this).next('.userInput').focus();
-    } else if (e.keyCode == 8){
-      $(this).prev('.userInput').focus();
-    }
-  });
+
   $("html").keyup(function(e){
     if (e.keyCode == 13) {
       handleSubmit();
@@ -66,6 +72,7 @@ $(document).ready(function() {
         $("#error").show();
       }
     }
+
     if (guess.length == puzzleLength) {
       clearGuessBoxes()
       numOfGuesses = numOfGuesses + 1;
@@ -75,13 +82,16 @@ $(document).ready(function() {
       appendGrid(blackCount, whiteCount);
       $("#error").hide();
     }
+
     if (blackCount == puzzleLength){
       youWin();
+    } else {
+      $('.userInput:first-of-type').focus();
     }
   }
   
   function youWin(){
-    redisplayCode(answerCode);
+    revealSecretCode(answerCode);
     $("#submit").prop("disabled",true);
   }
   
@@ -94,10 +104,11 @@ $(document).ready(function() {
     for (var i = 0; i < puzzleLength; i++) {
       code = code.concat([generateDigit()]);
     }
+
     return code;
   }
 
-  function redisplayCode(code){
+  function revealSecretCode(code){
     $("#round0").html("");
     for (var i = 0; i < puzzleLength; i++){
       $("#round0").append('<div class="piece c' + code[i] + '">' + code[i] + '</div>');
@@ -117,6 +128,7 @@ $(document).ready(function() {
     var selected = (i == colorsAllowed) ? "selected" : "";
     $("#chooseColorsAllowed").append('<option value="' + i + '" ' + selected + '>' + i + '</option>');
   }
+
   for (var i = 1; i < 10; i++){
     var selected = (i == puzzleLength) ? "selected" : "";
     $("#choosePuzzleLength").append('<option value="' + i + '" ' + selected + '>' + i + '</option>');
@@ -128,6 +140,7 @@ $(document).ready(function() {
         '<div class="row1"></div>' +
         '<div class="row2"></div>' +
       '</div>');
+
     var remBlackCount = blackCount;
     var remWhiteCount = whiteCount;
     var rowToAppendTo;
@@ -139,6 +152,7 @@ $(document).ready(function() {
         remBlackCount = remBlackCount - 1;
       } 
     }
+
     for (var i = 1; i <= puzzleLength; i++) { 
       rowToAppendTo = (i + blackCount <= Math.ceil(puzzleLength/2)) ? "row1" : "row2";
       if (remWhiteCount > 0) {
@@ -156,6 +170,7 @@ $(document).ready(function() {
         blackCount = blackCount + 1;
       }
     }
+
     return blackCount;
   }
   
@@ -170,6 +185,7 @@ $(document).ready(function() {
         whiteCount = whiteCount + 1;
       }
     } 
+
     return whiteCount - blackCount;
   }
 });

@@ -14,7 +14,16 @@
   <body>
     <div class="container">
       <h1>Mastermind</h1>
+      <p>
+        Guess the secret code by entering a number in each slot and pressing Submit. You will see a black peg for each correct digit in the correct slot, and a white peg for each correct digit in an incorrect slot.
+      </p>
+      <p>
+        Try to crack the code in as few guesses as possible.
+      </p>
       <div>
+        <h3>
+          Game Settings:
+        </h3>
         <p class="inline">How many colors would you like to have?</p>
         <select id="chooseColorsAllowed"></select>
       </div>
@@ -27,7 +36,7 @@
       <div class="round inline"></div>
       <button id="submit" class="btn btn-light btn-sm">Submit</button>
       <div id="game"></div>
-      <div id="error">Valid numbers only, asshole.</div>
+      <div id="error">Valid numbers only!</div>
     </div>
   </body>
 </html>
